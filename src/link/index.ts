@@ -1,6 +1,18 @@
-import { Element } from 'muser';
+import { Brush, Element, ElementConfig } from '../muser';
 
-export default class Link extends Element {
+interface LinkProps {
+  href: string;
+  text: string;
+}
+
+export default class Link extends Element<LinkProps> {
+  constructor(config: ElementConfig) {
+    super({
+      ...config,
+      alpha: true,
+    });
+  }
+
   state = {
     activate: false,
   };
@@ -23,34 +35,38 @@ export default class Link extends Element {
     });
   }
 
-  render({ props, state }: any) {
+  render({ props, state }: Link) {
     const COLOR = '#3370ff';
 
     return [
-      (ctx: CanvasRenderingContext2D) => {
+      (brush: Brush) => {
+        const { text: fillText } = brush;
         const { text } = props;
 
-        ctx.font = '14px normal';
-        ctx.fillStyle = COLOR;
-        ctx.textBaseline = 'middle';
-        ctx.fillText(text, 0, 15);
+        fillText(text, [0, 15], {
+          font: '14pr normal',
+          fillStyle: COLOR,
+          textBaseline: 'middle',
+        });
       },
-      (ctx: CanvasRenderingContext2D) => {
+      (brush: Brush) => {
+        const { line, measure, clearRect } = brush;
         const { text } = props;
         const { activate } = state;
 
-        ctx.font = '14px normal';
-        ctx.fillStyle = COLOR;
-        ctx.textBaseline = 'middle';
+        const width = measure(text, {
+          font: '14pr normal',
+          fillStyle: COLOR,
+          textBaseline: 'middle',
+        });
 
         if (activate) {
-          ctx.strokeStyle = COLOR;
-          ctx.lineWidth = 1;
-          ctx.moveTo(0, 21.5);
-          ctx.lineTo(ctx.measureText(text).width, 21.5);
-          ctx.stroke();
+          line([0, 21.5, width, 21.5], {
+            strokeStyle: COLOR,
+            lineWidth: 1,
+          });
         } else {
-          ctx.clearRect(0, 21, ctx.measureText(text).width + 1, 2);
+          clearRect([0, 21, width + 1, 2]);
         }
       },
     ];

@@ -5212,10 +5212,10 @@ multicast-dns@^6.0.1:
     dns-packet "^1.3.1"
     thunky "^1.0.2"
 
-muser@^1.2.4:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/muser/-/muser-1.2.4.tgz#c7137cf4c37887c7d1ce0f950485559f7ec63a01"
-  integrity sha512-FZ4UxUTGprymV+LJP/HRrewmbIl+5S/QMKRvOlI4iK7eGZmWlFtbng/kq4WgUgvM9B3/SOo6mFeaS4DC10lunA==
+muser@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/muser/-/muser-1.3.0.tgz#af92b1cd98dc9c85d8479c7b6bb279b663a795a8"
+  integrity sha512-j6V8YwqpcWkdCvkZueSAPOiOs8A2rcqq01RY7uKZGo8cDYeKR9Ht25jEUf3XUJGDvpfhU+g3REPfA/fwQatvfQ==
   dependencies:
     "@types/offscreencanvas" "^2019.6.4"
     eslint-config-prettier "^7.0.0"
